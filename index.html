@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>המעבדה של עומר</title>
+  <meta name="description" content="המעבדה של עומר — 14 פרויקטים בדרך.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f6f2;
+      --surface: #ffffff;
+      --text: #1b1b1f;
+      --muted: #6b6b75;
+      --line: #e3e1da;
+      --accent: #2f6df6;
+      --accent-soft: #e7eefe;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111114;
+        --surface: #1a1a1f;
+        --text: #f1f1f3;
+        --muted: #9a9aa5;
+        --line: #2a2a31;
+        --accent: #7aa2ff;
+        --accent-soft: #1d2640;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Heebo", system-ui, "Segoe UI", Arial, sans-serif;
+      line-height: 1.6;
+    }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+    header { padding: 88px 0 48px; }
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+    h1 {
+      font-size: clamp(2.4rem, 7vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      margin: 18px 0 14px;
+      letter-spacing: -0.02em;
+    }
+    .lead { font-size: 1.15rem; color: var(--muted); max-width: 52ch; margin: 0; }
+
+    .section-head {
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: 12px; flex-wrap: wrap;
+      border-top: 1px solid var(--line);
+      padding-top: 28px; margin-bottom: 20px;
+    }
+    h2 { font-size: 1.4rem; margin: 0; }
+    .count { color: var(--muted); font-size: 0.95rem; }
+
+    .grid {
+      list-style: none; padding: 0; margin: 0 0 80px;
+      display: grid; gap: 14px;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+    .card {
+      background: var(--surface);
+      border: 1px dashed var(--line);
+      border-radius: 14px;
+      padding: 20px;
+      min-height: 150px;
+      display: flex; flex-direction: column; gap: 8px;
+      transition: border-color .15s, transform .15s;
+    }
+    .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .num {
+      font-variant-numeric: tabular-nums;
+      font-weight: 700; color: var(--accent); font-size: 0.9rem;
+    }
+    .card h3 { margin: 0; font-size: 1.1rem; }
+    .card p { margin: 0; color: var(--muted); font-size: 0.92rem; flex: 1; }
+    .status {
+      align-self: flex-start;
+      font-size: 0.78rem; color: var(--muted);
+      border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 24px 0 40px; color: var(--muted); font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <span class="eyebrow">ניסויים, כלים ורעיונות</span>
+      <h1>המעבדה של עומר</h1>
+      <p class="lead">המקום שבו רעיונות הופכים לפרויקטים. ארבעה־עשר ניסויים בדרך — כל אחד יקבל כאן את הבית שלו.</p>
+    </header>
+
+    <main>
+      <div class="section-head">
+        <h2>פרויקטים</h2>
+        <span class="count">0 מתוך 14 הושלמו</span>
+      </div>
+      <ul class="grid" id="projects"></ul>
+    </main>
+
+    <footer>© <span id="year"></span> המעבדה של עומר</footer>
+  </div>
+
+  <script>
+    // ערוך כאן: שם, תיאור וסטטוס לכל פרויקט
+    const projects = Array.from({ length: 14 }, (_, i) => ({
+      title: `פרויקט ${i + 1}`,
+      description: "עוד אין כאן כלום — מקום שמור לרעיון הבא.",
+      status: "בקרוב",
+    }));
+
+    const list = document.getElementById("projects");
+    projects.forEach((p, i) => {
+      const li = document.createElement("li");
+      li.className = "card";
+      li.innerHTML = `
+        <span class="num">${String(i + 1).padStart(2, "0")}</span>
+        <h3></h3><p></p><span class="status"></span>`;
+      li.querySelector("h3").textContent = p.title;
+      li.querySelector("p").textContent = p.description;
+      li.querySelector(".status").textContent = p.status;
+      list.appendChild(li);
+    });
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
